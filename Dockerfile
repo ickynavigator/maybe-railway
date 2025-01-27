@@ -11,5 +11,11 @@ ENV SELF_HOSTED=true \
     POSTGRES_USER=${POSTGRES_USER:-maybe_user} \
     POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
+# Create and set permissions for the storage directory
+RUN mkdir -p /rails/storage && chown -R appuser:appgroup /rails/storage && chmod -R 775 /rails/storage
+
+# Set the user (if needed)
+USER appuser
+
 # Expose the application port
 EXPOSE 3000
