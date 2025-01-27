@@ -11,11 +11,12 @@ ENV SELF_HOSTED=true \
     POSTGRES_USER=${POSTGRES_USER:-maybe_user} \
     POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
+# Create the storage directory and set ownership to 'rails'
+USER root
+RUN mkdir -p /rails/storage && chown -R rails:rails /rails/storage && chmod -R 775 /rails/storage
+
+# Switch back to the 'rails' user
+USER rails
+
 # Expose the application port
 EXPOSE 3000
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
