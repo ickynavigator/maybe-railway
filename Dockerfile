@@ -13,6 +13,3 @@ ENV SELF_HOSTED=true \
 
 # Expose the application port
 EXPOSE 3000
-
-# Define a volume for app storage
-VOLUME /rails/storage
